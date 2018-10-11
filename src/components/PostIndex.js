@@ -1,49 +1,45 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import { fetchPosts } from "../actions/index";
-import {bindActionCreators} from "redux";
+import _ from "lodash"; 
 
 class PostIndex extends Component {
     constructor(props){
         super(props);
         this.renderPosts = this.renderPosts.bind(this);
     }
-    componentWillMount(){
+    componentDidMount(){
         this.props.fetchPosts();
     }
     renderPosts () {
         const {posts} = this.props;
-        if(Object.keys(posts).length > 0){
+        // if(Object.keys(posts).length > 0){
             return (
-                posts.map((post,i) => {
+                 _.map(posts, (post) => {
                         return(
-                            <div key={i}>
+                            <li key={post.id}>
                                 id: {post.id} <br />
                                 categories: {post.categories} <br />
                                 content: {post.content} <br />
                                 <hr />  
-                            </div>
+                            </li>
                             
                         )     
                 })
             )
-        }
-        return <div>Hello</div>;
+        // }
     }
     render(){
         return (
             <div>
-                {this.renderPosts()}
+                <h3>Posts</h3>
+                    <ul className="list-group">
+                    {this.renderPosts()}
+                    </ul>
+                
             </div>
         )
     }
-}
-
-
-function mapDispatchToProps(dispatch){
-   
-    return bindActionCreators({fetchPosts:fetchPosts}, dispatch);
-    // dispatch function takes all of our actions and passes them to all the other reducers
 }
 
 function mapStateToProps(state){
@@ -53,4 +49,4 @@ function mapStateToProps(state){
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostIndex);
+export default connect(mapStateToProps, {fetchPosts})(PostIndex);

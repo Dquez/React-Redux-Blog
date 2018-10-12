@@ -13,21 +13,22 @@ class PostIndex extends Component {
     }
     renderPosts () {
         const {posts} = this.props;
-        // if(Object.keys(posts).length > 0){
+        // check length of object, but since we're using lodash, it won't return undefined for an empty object
+        // if(Object.keys(posts).length > 0)
             return (
                  _.map(posts, (post) => {
                         return(
                             <li key={post.id}>
                                 id: {post.id} <br />
-                                categories: {post.categories} <br />
-                                content: {post.content} <br />
+                                Title: {post.title} <br />
+                                Categories: {post.categories} <br />
+                                Content: {post.content} <br />
                                 <hr />  
                             </li>
                             
                         )     
                 })
             )
-        // }
     }
     render(){
         return (

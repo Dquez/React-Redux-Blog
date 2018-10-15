@@ -17,6 +17,7 @@ class NewPost extends Component {
                 <input 
                 className="form-control"
                 type="text"
+                // grab all properties on field input obj to hook up field component to redux form
                {...field.input}
                 />
                 <div className="text-help">
@@ -29,6 +30,7 @@ class NewPost extends Component {
     }
     onSubmit(values) {
         this.props.submitPost(values, ()=> {
+            // callback to redirect user after successful post deletion
             this.props.history.push("/");
         });
     }
@@ -39,6 +41,7 @@ class NewPost extends Component {
                 <Field 
                     name="title"
                     label="Title"
+                    // Field responsible for handling state and validation but we have to create the visible component using react
                     component={this.renderField}
                 />
                 <Field 
@@ -81,5 +84,6 @@ export default reduxForm ({
     validate,
     form: 'NewPostForm'
 })(
+    // because we're using redux form, we need to still connect our component to hook it up to redux as a container with access to submit post action creator
     connect(null, {submitPost})(NewPost)
     )

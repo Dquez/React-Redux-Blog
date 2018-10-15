@@ -41,6 +41,7 @@ export function fetchPost (id) {
 // function to create an ajax request for one post associated with id
 export function deletePost (id, callback) {
     const request = axios.delete(`${ROOT_URL}/${id}${API_KEY}`).then(()=>{
+        // callback invoked once data is deleted from backend, which sets user's url to the root url
         callback();
     })
     return {

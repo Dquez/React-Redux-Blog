@@ -6,6 +6,7 @@ import {fetchPost, deletePost} from "../actions";
 class Post extends Component {
 
     componentDidMount () {
+        // destructured id from url "/posts/32134"
         const {id} = this.props.match.params;
         this.props.fetchPost(id);
     }
@@ -17,6 +18,7 @@ class Post extends Component {
     }
     render(){
         const {post} = this.props;
+        // check if post exists yet in props, which it wont during initial fetch request execution
         if (!post) {
             return <div>Loading...</div>
         }
@@ -46,5 +48,5 @@ function mapStateToProps({posts}, ownProps){
     };
 }
 
-
+// fetchPost and deletePost are destructured methods, now hooked up to redux and available as props
 export default connect(mapStateToProps, {fetchPost, deletePost})(Post);

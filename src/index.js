@@ -17,9 +17,9 @@ ReactDOM.render(
     <BrowserRouter>
       <div>
         <Switch>
+          {/* Always use most specific route first because switch will match component to first matching path */}
           <Route path="/posts/new" component={NewPost} />
           <Route path="/posts/:id"  component={Post} />
-          {/* Always use most specific route first because switch will match component to first matching path */}
           <Route path="/"  component={PostIndex} />
           
         </Switch>

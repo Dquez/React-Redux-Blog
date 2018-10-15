@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { fetchPosts } from "../actions/index";
 import { Link } from "react-router-dom";
 import _ from "lodash"; 
+// connect upgrades PostIndex component to container which has access to redux store, grabs fetchPost method from action creators to include in redux state
 
 class PostIndex extends Component {
     constructor(props){
@@ -10,12 +11,15 @@ class PostIndex extends Component {
         this.renderPosts = this.renderPosts.bind(this);
     }
     componentDidMount(){
+        // when component mounts, create ajax request to retrieve all posts associated with api key
         this.props.fetchPosts();
     }
     renderPosts () {
+        // grab posts object which is structured as { key : {post}}, refactored from an array using lodash
         const {posts} = this.props;
         // check length of object, but since we're using lodash, it won't return undefined for an empty object
         // if(Object.keys(posts).length > 0)
+        // use lodash to iterate over object concisely
             return (
                  _.map(posts, (post) => {
                         return(
@@ -49,6 +53,7 @@ class PostIndex extends Component {
     }
 }
 
+// hook up redux state "props" to PostIndex's props as "this.props.posts"
 function mapStateToProps(state){
     return {
         posts: state.posts
@@ -56,4 +61,5 @@ function mapStateToProps(state){
 }
 
 
+// hook up state to props as well as fetchPosts method, which are now available on props object
 export default connect(mapStateToProps, {fetchPosts})(PostIndex);

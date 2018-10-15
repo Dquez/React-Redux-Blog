@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import { submitPost } from "../actions";
+// connect upgrades NewPost component to container which has access to redux store
 
 class NewPost extends Component {
     constructor(props){
@@ -76,5 +77,5 @@ class NewPost extends Component {
 
 
 
-
+// adding destructured method as a prop on NewPost component
 export default connect(null, {submitPost})(NewPost);

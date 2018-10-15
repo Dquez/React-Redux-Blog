@@ -5,6 +5,7 @@ import _ from "lodash";
 export default function (state = {}, action) {
     switch(action.type){
         case FETCH_POSTS:
+        // set up an object of objects, in which the keys("id") correspond to each "post" object
             const dataObj = _.mapKeys(action.payload.data, "id");
             return dataObj;
         case SUBMIT_POST:

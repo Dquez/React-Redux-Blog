@@ -23,14 +23,11 @@ class PostIndex extends Component {
             return (
                  _.map(posts, (post) => {
                         return(
-                            <li key={post.id}>
-                                id: {post.id} <br />
-                                Title: {post.title} <br />
-                                Categories: {post.categories} <br />
-                                Content: {post.content} <br />
-                                <hr />  
+                            <li className="list-group-item" key={post.id}>
+                                <Link to={`/posts/${post.id}`}>
+                                    Title: {post.title} <br />
+                                </Link>
                             </li>
-                            
                         )     
                 })
             )

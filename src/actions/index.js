@@ -5,7 +5,9 @@ const ROOT_URL = "http://reduxblog.herokuapp.com/api/posts";
 
 // variables to be imported and used in our reducers switch statement, instead of hard coding a string
 export const FETCH_POSTS = 'FETCH_POSTS';
+export const FETCH_POST = 'FETCH_POST';
 export const SUBMIT_POST = 'SUBMIT_POST';
+export const DELETE_POST = 'DELETE_POST';
 
 // function to create an ajax request for posts associated with api key
 export function fetchPosts () {
@@ -24,5 +26,25 @@ export function submitPost (post, callback) {
     return {
         type: SUBMIT_POST,
         payload: request
+    }
+}
+
+// function to create an ajax request for one post associated with id
+export function fetchPost (id) {
+    const request = axios.get(`${ROOT_URL}/${id}${API_KEY}`);
+    return {
+        type: FETCH_POST,
+        payload: request
+    }
+}
+
+// function to create an ajax request for one post associated with id
+export function deletePost (id, callback) {
+    const request = axios.delete(`${ROOT_URL}/${id}${API_KEY}`).then(()=>{
+        callback();
+    })
+    return {
+        type: DELETE_POST,
+        payload: id
     }
 }

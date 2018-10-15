@@ -5,6 +5,7 @@ import { createStore, applyMiddleware } from 'redux';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import PostIndex from './components/PostIndex';
 import NewPost from './components/NewPost';
+import Post from './components/Post';
 import reducers from './reducers';
 import ReduxPromise from 'redux-promise';
 // create a single Redux store, with Redux Proimse acting as a gatekeeper for when a payload is attached to a action, it will handle asychronous calls so that payloads are returned after they finish loading their data
@@ -17,8 +18,10 @@ ReactDOM.render(
       <div>
         <Switch>
           <Route path="/posts/new" component={NewPost} />
+          <Route path="/posts/:id"  component={Post} />
           {/* Always use most specific route first because switch will match component to first matching path */}
           <Route path="/"  component={PostIndex} />
+          
         </Switch>
       </div>
     </BrowserRouter>

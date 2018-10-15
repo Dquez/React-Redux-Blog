@@ -2,6 +2,9 @@ import React, {Component} from "react";
 import {Field, reduxForm} from "redux-form";
 // reduxForm upgrades NewPost component to container which has access to redux store
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
+import {submitPost} from "../actions/index";
+
 class NewPost extends Component {
 
     renderField (field) {
@@ -25,7 +28,9 @@ class NewPost extends Component {
 
     }
     onSubmit(values) {
-        console.log(values);
+        this.props.submitPost(values, ()=> {
+            this.props.history.push("/");
+        });
     }
     render(){
         const {handleSubmit} = this.props;
@@ -75,4 +80,6 @@ function validate (values){
 export default reduxForm ({
     validate,
     form: 'NewPostForm'
-})(NewPost)
+})(
+    connect(null, {submitPost})(NewPost)
+    )

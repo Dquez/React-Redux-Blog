@@ -8,11 +8,6 @@ export default function (state = {}, action) {
             const dataObj = _.mapKeys(action.payload.data, "id");
             return dataObj;
         case FETCH_POST:
-            // alternative to spread operator using obj {...state}
-            // const post = action.payload.data; 
-            // const newState = {...state};
-            // newState[post.id] = post
-            // return newState
             return {...state, [action.payload.data.id]: action.payload.data}
         case DELETE_POST:
             return _.omit(state, action.payload);
